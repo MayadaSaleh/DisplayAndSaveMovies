@@ -26,8 +26,9 @@ public class MainActivity extends Activity {
     String [] moviesPosters;
 
     RecyclerView  recyclerView;
-    DataAdapter adapter;
-    DatabaseAdapter mySQLiteAdapter;
+    private DataAdapter adapter;
+    private DatabaseAdapter mySQLiteAdapter;
+    private Cursor c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +55,16 @@ public class MainActivity extends Activity {
 //       modelClass.movieNames();
 
 
-        Cursor c = mySQLiteAdapter.fetch();
+        c = mySQLiteAdapter.fetch();
         c.moveToFirst();
-        int i=0;
-        if (c != null && c.moveToFirst()==true) {
-            Log.i("testMemo","From SQLite "+c.getCount());
-            moviesPosters = new String[c.getCount()];
-            moviesNames = new String[c.getCount()];
-
-            do {
-                moviesNames[i]=(c.getString(0));
-                moviesPosters[i]=(c.getString(1));
-                i++;
-            } while (c.moveToNext());
-            adapter = new DataAdapter(this, moviesPosters, moviesNames);
-            recyclerView.setAdapter(adapter);
+        if (c != null && c.moveToFirst() == true) {
+            fetchDataFromSQLite();
         } else {
+            callingAPI();
+        }
+    }
+
+    private void callingAPI(){
             Log.i("testMemo","From Web API");
 
             Call<OuterPojo> responseCall = APIRetrofitUtils.getService().getPosters();
@@ -97,5 +92,18 @@ public class MainActivity extends Activity {
                 }
             });
         }
+
+    private void fetchDataFromSQLite(){
+        Log.i("testMemo","From SQLite "+c.getCount());
+        moviesPosters = new String[c.getCount()];
+        moviesNames = new String[c.getCount()];
+        int counter=0;
+        do {
+            moviesNames[counter]=(c.getString(0));
+            moviesPosters[counter]=(c.getString(1));
+            counter++;
+        } while (c.moveToNext());
+        adapter = new DataAdapter(this, moviesPosters, moviesNames);
+        recyclerView.setAdapter(adapter);
     }
 }
