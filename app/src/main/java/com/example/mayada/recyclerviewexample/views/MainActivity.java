@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.mayada.recyclerviewexample.ModelClass;
 import com.example.mayada.recyclerviewexample.R;
 import com.example.mayada.recyclerviewexample.data.control.APIRetrofitUtils;
 import com.example.mayada.recyclerviewexample.database.sqlite.DatabaseAdapter;
 import com.example.mayada.recyclerviewexample.pojos.OuterPojo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import butterknife.BindView;
@@ -27,7 +29,9 @@ public class MainActivity extends Activity {
 
     @BindView(R.id.welcoming)
     TextView welcoming;
-    private ModelClass modelClass;
+    @BindView(R.id.shownStory)
+    TextView shownStory;
+
     String []moviesNames;
     String [] moviesPosters;
 
@@ -42,11 +46,33 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //Check shared preference
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        //Retrieve from shared preference
         SharedPreferences sharedPreferences= getSharedPreferences("PersonName",0);
         String name = sharedPreferences.getString("name","NotFound");
         if(name != null && name != "NotFound") {
             welcoming.setText("Welcome  " + name);
+        }
+
+        // Retrieve from Internal Storage
+        try {
+
+            FileInputStream fileInputStream = openFileInput("Saved Stories");
+            byte[] byteArray=new byte[fileInputStream.available()];
+            fileInputStream.read(byteArray);
+            String retrievedStory =new String(byteArray);
+            shownStory.setText(retrievedStory);
+            fileInputStream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         //SQLITE Database
@@ -56,18 +82,6 @@ public class MainActivity extends Activity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-//
-//       modelClass  = new ModelClass();
-//       modelClass.getPhotos();
-//       modelClass.movieNames();
-
 
         c = mySQLiteAdapter.fetch();
         c.moveToFirst();
@@ -106,6 +120,7 @@ public class MainActivity extends Activity {
                 }
             });
         }
+
 
     private void fetchDataFromSQLite(){
         Log.i("testMemo","From SQLite "+c.getCount());

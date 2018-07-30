@@ -4,11 +4,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Mayada on 7/26/2018.
+ * Created by Mayada on 7/30/2018.
  */
 
 public class RetrofitCreation {
-
     public static Retrofit getClient(String baseUrl) {
         Retrofit retrofit = null;
         if (retrofit==null) {
