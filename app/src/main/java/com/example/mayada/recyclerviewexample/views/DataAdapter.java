@@ -1,4 +1,4 @@
-package com.example.mayada.recyclerviewexample;
+package com.example.mayada.recyclerviewexample.views;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.mayada.recyclerviewexample.R;
 
 /**
  * Created by Mayada on 7/25/2018.

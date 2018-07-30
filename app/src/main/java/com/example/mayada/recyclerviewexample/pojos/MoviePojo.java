@@ -1,4 +1,4 @@
-package com.example.mayada.recyclerviewexample;
+package com.example.mayada.recyclerviewexample.pojos;
 
 /**
  * Created by Mayada on 7/26/2018.

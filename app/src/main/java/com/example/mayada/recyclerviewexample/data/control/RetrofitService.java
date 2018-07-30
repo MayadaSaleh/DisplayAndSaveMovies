@@ -1,4 +1,6 @@
-package com.example.mayada.recyclerviewexample;
+package com.example.mayada.recyclerviewexample.data.control;
+
+import com.example.mayada.recyclerviewexample.pojos.OuterPojo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

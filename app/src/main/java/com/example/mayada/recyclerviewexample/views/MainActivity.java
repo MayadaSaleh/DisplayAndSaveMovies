@@ -1,4 +1,4 @@
-package com.example.mayada.recyclerviewexample;
+package com.example.mayada.recyclerviewexample.views;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import java.util.ArrayList;
+import com.example.mayada.recyclerviewexample.ModelClass;
+import com.example.mayada.recyclerviewexample.R;
+import com.example.mayada.recyclerviewexample.data.control.APIRetrofitUtils;
+import com.example.mayada.recyclerviewexample.pojos.OuterPojo;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,4 +1,4 @@
-package com.example.mayada.recyclerviewexample;
+package com.example.mayada.recyclerviewexample.data.control;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
