@@ -1,0 +1,59 @@
+Lecture>> 5 Location
+Law hsht3'l b GPS bs>>>> Permisssion.Access_FINE_LOCATION
+Law hsht3'l b Network bs>>> Permisssion.Access_Coarse_LOCATION
+Law hst3'l bl etneen >>Fine kfaya 
+
+el permissions de m7tageen n7otha fl manfiest 2bl android 6 3lshan 2wel ma ynzl el app y2ol
+lel user 27na m7tageen permissions 3l 7agat de kolha
+law mn android 6 w b3do mfrod n-check 3l permission 2bl ma nst5dm el 7etta de bs 
+
+
+this de elly hya el context btb2a bl class elly ana wa2ef feh, law wa2ef f inner class yb2a
+lazem nktb 2sm el activity.this msh nktb this bs 
+
+requestPermission de method built in hya el ms2ola 3n el pop elly ytl3 w y2ol m7tageen n-active
+el GPS msln
+
+Lecture>> 6 Threading 3lshan mytl3 ANR
+Lt7seen el performance, bnst5dmo law 3nde blocking code, lengthy operation
+bst5dmo>> law b3ml connection,blocking>> law b-read file kbeer awe mn 3la stream,
+ law bm3l for loop ow while kbyra gwaha if w lela, law sh3'al m3 el database
+
+For parallel task, for long operations more than 5 secs , el android 2sln sh3'al single thread , activity, fragment,service,broadcast reciever 
+kolhom sh3'aleen 3l main thread, 
+UI components not thread save, y3ne lazem 2t3amel m3ahom mn el main thread bs
+
+Java Threads >>> extend thread or implement runnable w gwa el Run n3ml elly 3yzeno el etneen zy b3d 
+AsyncTask >> kwysa f 2nha t5lene 22dr 2t3amel m3 el foreground wl background
+trteeb >> onPreExcute btt3amel m3 el UI >>doInBackground, wana fl background
+law 3ayz 2tl3 progress bar>nnade 3la publish progress w mnha nnade 3la OnProgressUpdate btsht3'l 
+m3 el foreground bs kda lesa el doInBackground m5lstsh, b3d ma t5ls bnnade 3l onPostExecute elly bt2dr tt3amel
+brdo me el foreground.
+hya sahl 2st5dmha bs moshkltha en el lifecycle bt3tha msh mortbt bl activity f momkn y-crash law ra7 ynfz
+el operation w rg3 l2a activity tanya, or law 3mlna rotate kda by3tbr en el activity matet w gt activity tanya
+f brdo hy-crash
+
+Lec 7 Services>
+mlhosh UI, lyha it's own lifecycle.
+bst5dmha lma b3ml 7aga bta5od w2t taweel,sh3'ala fl background bs sh3'ala 3l main thread, zy run music 
+in background"soundlcoud".
+el service lyha 2 modes>> 
+started service,bsh3'lha b startService, btsht3'l fl background m3 nfsaha mlysh interaction m3aha, ya 2ma ana 22flha ya 2ma 22olha mwatee nfsk lma y7sl kza, zy download el file.
+bounded service, bsh3'lha b bindService, btb2a sh3'ala b model client-server y3ne bklmha w trod 3lya zy el soundcloud feh UI b2dr 2t7km mn 5lalo fl service, onBind method
+btg3lee 7aga mn no3 Ibinder, Ibinder dh interface ms2ol 3l remote object elly bytm el t3amol 3leh k client-server f hn3ml inner class be-extend Binder class
+w hwa be-implement Ibinder 2sln f 
+
+
+el fr2 ben el service wl intent service en el intent service sh3'ala brdo fl background bs lyha it's own thread, f kda msh m7tag 23ml thread lma 23ml gwaha lengthy operation, lma
+bt5ls sho3'lha hya bt2fl lwa7dha, onHandleIntent de method zyada hya de elly hsht3'l fyha w bta5od intent 3lshan law 3lyha 
+m3lomat gyalha, fokk b2a mn onStartCommand method.
+for startedService mn el 27sn nst5dm el intent service m3aha.
+
+Broadcast reciever
+respond to notifications or status change,
+zy msln law 3yzeen n-listen 3la en el battery low , lma el battery tb2a low msln bytrma intent mo3yna by7slha broadcast w elly 3ndo capability eno y-handle
+el intent de hwa elly be-recieve el intent de.
+gwa el onRecieve bta3et el broadcast reciever lazem m3mlsh gwaha 7aga bta5od 2k2tr mn 5 secs 3lshan el broadcast sh3'al 3l main thread.
+
+el volley msh be-cache lwa7do, lazem ana elly 23ml el caching, w law el data elly b-connect 3lyha mot3'yra, yb2a 22olo 3la tool mdam fe internet 2tl3 3l net mtgbsh mn el cache.
+fe 7aga 2smha LruCache >>least recently used, kda by-cache 7aba so3'yareen.
