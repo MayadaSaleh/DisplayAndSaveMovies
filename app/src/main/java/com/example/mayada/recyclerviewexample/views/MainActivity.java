@@ -1,11 +1,13 @@
 package com.example.mayada.recyclerviewexample.views;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.mayada.recyclerviewexample.ModelClass;
 import com.example.mayada.recyclerviewexample.R;
@@ -15,12 +17,16 @@ import com.example.mayada.recyclerviewexample.pojos.OuterPojo;
 
 import java.sql.SQLException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends Activity {
 
+    @BindView(R.id.welcoming)
+    TextView welcoming;
     private ModelClass modelClass;
     String []moviesNames;
     String [] moviesPosters;
@@ -34,6 +40,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        //Check shared preference
+        SharedPreferences sharedPreferences= getSharedPreferences("PersonName",0);
+        String name = sharedPreferences.getString("name","NotFound");
+        if(name != null && name != "NotFound") {
+            welcoming.setText("Welcome  " + name);
+        }
 
         //SQLITE Database
         mySQLiteAdapter = new DatabaseAdapter(this);

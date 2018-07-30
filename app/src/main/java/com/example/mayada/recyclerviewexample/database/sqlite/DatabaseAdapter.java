@@ -42,6 +42,8 @@ public class DatabaseAdapter {
 
     public Cursor fetch() {
         String[] columns = new String[] { DatabaseHelper.name, DatabaseHelper.url };
+
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Fetching data order by movie name
         Cursor cursor = sqLiteDatabase.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, DatabaseHelper.name);
         if (cursor != null) {
             cursor.moveToFirst();
