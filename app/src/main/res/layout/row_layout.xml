@@ -4,13 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:weightSum="5">
 
-    <ImageView
+    <com.pkmmte.view.CircularImageView
         android:layout_width="0dp"
         android:layout_height="120dp"
+        android:layout_weight="3"
         android:id="@+id/myImg"
-        android:layout_weight="3"/>
+        android:src="@drawable/background"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        app:border="true"
+        app:border_color="#EEEEEE"
+        app:border_width="2dp"
+        app:shadow="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:textSize="18sp"
